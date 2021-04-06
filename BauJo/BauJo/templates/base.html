@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+
+{% block styles %}
+<link rel=stylesheet href="{% static 'style.css' %}">
+{% endblock %}
+
+<html>
+<head>
+	<meta charest = "utf-8">
+	<meta name= "viewport" content = "width=device-width">
+
+	<title>{% block title %}{% endblock %}</title>
+	
+    <h2 align = 'center'> {% block header %} {% endblock %} </h2>
+    <hr class="dotted">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href = "{% url 'home' %}">Home</a></li>
+            <li><a href = "{% url 'profile' %}">Profile</a></li>
+            <li><a href = "{% url 'key' %}">Key</a></li>
+            <li><a href = "{% url 'this_week' %}">This Week</a></li>
+            <li><a href = "{% url 'today' %}">Today</a></li>
+        </ul>
+    </nav>
+{% block body %}
+{% endblock %}
+</body>
+</html>

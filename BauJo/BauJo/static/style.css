@@ -1,0 +1,29 @@
+nav {
+    height: 80px;
+    width: 100%;
+    line-height: 40px;
+    overflow: auto;
+    background-color:black;
+    overflow: hidden;
+}
+nav ul{
+    float: center;
+}
+nav ul li{
+    display: inline-block;
+    list-style-type: none;
+}
+nav ul a{
+    text-decoration: none;
+    color: white;
+    padding: 35px;
+}
+nav ul a:hover{
+    background-color: rgb(34, 34, 34);
+    color: white;
+}
+
+nav ul a:active{
+    background-color: #4CAF50;
+    color: white;
+}

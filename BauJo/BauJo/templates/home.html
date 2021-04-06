@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Bujo{% endblock %}
+
+{% block header %}Your Bullet Journal{% endblock %}
+
+{% block body %}
+
+{% if name %}
+
+<h1> Hello {{name}}! Today is going to be a great day! </h1>
+
+{% else %}
+
+<h1> Hello! What is your name? </h1>
+
+<form url = "home" method = "POST"> 
+{% csrf_token %}
+{{ form }}
+<input type="submit" name="submit" id = "submit" value = "Submit Name">
+</form>
+
+{% endif %}
+
+{% endblock %}
+
