@@ -5,12 +5,25 @@
 {% block header %}Key{% endblock %}
 
 {% block body %}
-
+<br>
+<h3>   Key  : Description </h3>
 <h3> • Tasks: Things you have to do </h3>
 <h3> - Notes: Things you don't want to forget</h3>
 <h3> O Events: Noteworthy moments in time </h3>
-<h4> 	• Task incomplete </h4>
-<h4> 	x Task complete </h4>
+
+<ul> 
+
+{% for x in object_list %} 
+
+{{x.keyName}} : {{x.keyDesc}}
+
+<br>
+
+{% endfor %}
+
+</ul>
+
+<button align = "center" href = "{% url 'new_key' %}">Add New Key</button>
 
 
 {% endblock %}

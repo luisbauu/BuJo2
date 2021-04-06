@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse
 from django.views.generic import View, ListView
 from datetime import datetime
@@ -32,6 +32,15 @@ def page_key(request):
 
 def page_this_week(request):
     return render(request, 'this_week.html')
+
+def new_key(request):
+	form = key()
+	if request.method == 'POST':
+		form = key(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('key')
+	return render(request,'new_key.html', {'form' : form})
 
 def page_today(request):
 
