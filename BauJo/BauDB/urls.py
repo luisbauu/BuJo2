@@ -15,17 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
-from .views import page_home, page_profile, page_key, page_today, page_this_week, page_today, KeyListView, new_key
+#from .views import page_home, page_profile, page_key, page_today, page_this_week, page_today, KeyListView, new_key, ProfileDetailView, ProfileNameView, ProfileBioView
+from .views import *
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', page_home, name = 'home'),
     path('home/', page_home, name = 'home'),
-    path('profile/', page_profile, name = 'profile'),
+    path('profile/', ProfileDetailView.as_view(), name = 'profile'),
     path('key/', KeyListView.as_view(), name = 'key'),
     path('this_week/', page_this_week, name = 'this_week'),
     path('today/', page_today, name = 'today'),
     path('new_key/', new_key, name = 'new_key'),
+    path('new_name/',ProfileNameView.as_view(), name = 'new_name'),
+    path('new_bio/',ProfileBioView.as_view(), name = 'new_bio'), 
+    path('new_image/',ProfileImageView.as_view(), name = 'new_image'), 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

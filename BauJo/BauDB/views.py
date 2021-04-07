@@ -1,16 +1,15 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, DetailView, UpdateView
 from datetime import datetime
-from .forms import home, profile, key, this_week, today
-from .models import key_model
+from .forms import home, key, this_week, today,profileFormName, profileFormBio, profileFormImage
+from .models import key_model, profile_model
 
 name = None
 form = None
 
 def page_home(request): 
 	global name
-	global form
 
 	if name == None:
 		if request.method == 'POST':
@@ -22,7 +21,7 @@ def page_home(request):
 			form = home()
 			return render(request, 'home.html', {'form' : form})
 	else:
-		return render(request, 'home.html', {'form' : form, 'name' : name})
+		return render(request, 'home.html', {'name' : name})
 
 def page_profile(request):
 	return render(request, 'profile.html')
@@ -40,7 +39,7 @@ def new_key(request):
 		if form.is_valid():
 			form.save()
 			return redirect('key')
-	return render(request,'new_key.html', {'form' : form})
+	return render(request,'update.html', {'form' : form})
 
 def page_today(request):
 
@@ -52,3 +51,45 @@ def page_today(request):
 class KeyListView(ListView):
 	model = key_model
 	template_name = 'key.html'
+
+class ProfileDetailView(DetailView):
+	model = profile_model
+	template_name = 'profile.html'
+
+	def get_object(self):
+		return profile_model.objects.first()
+
+
+class ProfileNameView(UpdateView):
+	model = profile_model
+	template_name = 'update.html'
+	form_class = profileFormName
+
+	def get_object(self):
+		return profile_model.objects.first()
+
+	def get_success_url(self):
+		return reverse('profile')
+
+class ProfileBioView(UpdateView):
+	model = profile_model
+	template_name = 'update.html'
+	form_class = profileFormBio
+
+	def get_object(self):
+		return profile_model.objects.first()
+
+	def get_success_url(self):
+		return reverse('profile')
+
+class ProfileImageView(UpdateView):
+	model = profile_model
+	template_name = 'update.html'
+	form_class = profileFormImage
+
+	def get_object(self):
+		return profile_model.objects.first()
+
+	def get_success_url(self):
+		return reverse('profile')
+

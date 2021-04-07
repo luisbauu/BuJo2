@@ -8,9 +8,16 @@
 {% block body %}
 <br>
 
-<img src="{% static 'john.jpg' %}" width="600" height="400">
+<img src= {{ object.profileImage.url}} width="400" height="400">
 
-<h3> This is John Batungbacal. <br>He works at the SM department store as a sales representative. <br>He likes to play Mobile Legends and customizing his motorcycle.</h3>
+<br>
+<a href = "{% url 'new_image' %}"><button>Edit Pic</button></a>
+
+<h3>Name: {{object.profileName}}</h3>
+<a href = "{% url 'new_name' %}"><button>Edit Name</button></a>
+<br>
+<h3>Bio: {{object.profileBio}}</h3>
+<a href = "{% url 'new_bio' %}"><button>Edit Bio</button></a>
 
 
 {% endblock %}
