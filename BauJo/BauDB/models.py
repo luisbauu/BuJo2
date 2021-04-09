@@ -24,6 +24,9 @@ class today_model(models.Model):
 	def today_delete(self):
 		return reverse('today_delete', args = [str(self.id)])
 
+	def today_done(self):
+		return reverse('today_done', args = [str(self.id)])
+
 
     # def deltwtask(self):
     #     return reverse('deletetwtask', args=[str(self.id)])

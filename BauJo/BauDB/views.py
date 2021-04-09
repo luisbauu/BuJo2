@@ -52,6 +52,13 @@ def new_key(request):
 	return render(request,'update.html', {'form' : form})
 
 
+def page_today_done(request,pk):
+	done = today_model.objects.get(id = pk)
+	done.keyModel = key_model.objects.get(id = 30)
+	done.save()
+	return redirect('today')
+
+
 def page_today(request):
 
     myDate = datetime.now()
@@ -122,3 +129,4 @@ class TodayDeleteView(DeleteView):
 
 	def get_success_url(self):
 		return reverse('today')
+

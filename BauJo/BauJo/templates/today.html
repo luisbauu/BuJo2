@@ -10,10 +10,24 @@
 
 {% for x in object_list %} 
 
-{{x.keyModel.keyName}} : {{x.todayDesc}} |
+{% if x.keyModel.keyName == '• Task' %}
+
+{{x.keyModel.keyName}} : {{x.todayDesc}} ||
+<a href = "{{ x.today_edit }}"><button>Edit</button></a>
+<a href = "{{ x.today_delete }}"><button>Delete</button></a>
+<a href = "{{ x.today_done }}"><button>Mark as Done</button></a>
+
+<br>
+
+{% else %}
+
+{{x.keyModel.keyName}} : {{x.todayDesc}} ||
 <a href = "{{ x.today_edit }}"><button>Edit</button></a>
 <a href = "{{ x.today_delete }}"><button>Delete</button></a>
 <br>
+
+{% endif %}
+
 {% endfor %}
 
 <br>

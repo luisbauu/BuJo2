@@ -36,4 +36,5 @@ urlpatterns = [
     path('new_image/',ProfileImageView.as_view(), name = 'new_image'),
     path('new_today_update/<int:pk>/',TodayUpdateView.as_view(), name = 'new_today_update'), 
     path('today_delete/<int:pk>/',TodayDeleteView.as_view(), name = 'today_delete'),
+    path('today_done/<int:pk>/',page_today_done, name = 'today_done'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
