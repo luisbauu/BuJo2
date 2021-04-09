@@ -8,10 +8,15 @@
 
 <h1> 3.24.WED </h1>
 
-<h3> • Pabili ni baby </h3>
-<h3> • NBI Clearance </h3>
-<h3> - Pabili ni baby </h3>
-<h3> - Mga sinampay, baka umulan </h3>
-<h3> O ML league stream (8pm) </h3>
+{% for x in object_list %} 
+
+{{x.keyModel.keyName}} : {{x.todayDesc}} |
+<a href = "{{ x.today_edit }}"><button>Edit</button></a>
+<a href = "{{ x.today_delete }}"><button>Delete</button></a>
+<br>
+{% endfor %}
+
+<br>
+<a href = "{% url 'new_today' %}"><button>Add Item</button></a>
 
 {% endblock %}

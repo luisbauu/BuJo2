@@ -28,10 +28,12 @@ urlpatterns = [
     path('profile/', ProfileDetailView.as_view(), name = 'profile'),
     path('key/', KeyListView.as_view(), name = 'key'),
     path('this_week/', page_this_week, name = 'this_week'),
-    path('today/', page_today, name = 'today'),
+    path('today/', TodayListView.as_view(), name = 'today'),
     path('new_key/', new_key, name = 'new_key'),
+    path('new_today/', new_today, name = 'new_today'),
     path('new_name/',ProfileNameView.as_view(), name = 'new_name'),
     path('new_bio/',ProfileBioView.as_view(), name = 'new_bio'), 
-    path('new_image/',ProfileImageView.as_view(), name = 'new_image'), 
-
+    path('new_image/',ProfileImageView.as_view(), name = 'new_image'),
+    path('new_today_update/<int:pk>/',TodayUpdateView.as_view(), name = 'new_today_update'), 
+    path('today_delete/<int:pk>/',TodayDeleteView.as_view(), name = 'today_delete'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

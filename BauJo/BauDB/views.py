@@ -1,9 +1,10 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse
-from django.views.generic import View, ListView, DetailView, UpdateView
+from django.views.generic import View, ListView, DetailView, UpdateView, DeleteView
 from datetime import datetime
-from .forms import home, key, this_week, today,profileFormName, profileFormBio, profileFormImage
-from .models import key_model, profile_model
+from .forms import *
+#from .forms import home, key, this_week, today,profileFormName, profileFormBio, profileFormImage
+from .models import *
 
 name = None
 form = None
@@ -32,6 +33,15 @@ def page_key(request):
 def page_this_week(request):
     return render(request, 'this_week.html')
 
+def new_today(request):
+	form = today()
+	if request.method == 'POST':
+		form = today(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('today')
+	return render(request,'update.html', {'form' : form})
+
 def new_key(request):
 	form = key()
 	if request.method == 'POST':
@@ -41,24 +51,24 @@ def new_key(request):
 			return redirect('key')
 	return render(request,'update.html', {'form' : form})
 
+
 def page_today(request):
 
     myDate = datetime.now()
     formattedDate = myDate.strftime("%m.%d.%A")
     
     return render(request, 'today.html', {'date': formattedDate})
-
+################
 class KeyListView(ListView):
 	model = key_model
 	template_name = 'key.html'
-
+################
 class ProfileDetailView(DetailView):
 	model = profile_model
 	template_name = 'profile.html'
 
 	def get_object(self):
 		return profile_model.objects.first()
-
 
 class ProfileNameView(UpdateView):
 	model = profile_model
@@ -92,4 +102,23 @@ class ProfileImageView(UpdateView):
 
 	def get_success_url(self):
 		return reverse('profile')
+################
+class TodayListView(ListView):
+	model = today_model
+	template_name = 'today.html'
 
+class TodayUpdateView(UpdateView):
+	model = today_model
+	template_name =  'update.html'
+	form_class = today
+
+	def get_success_url(self):
+		return reverse('today')
+
+class TodayDeleteView(DeleteView):
+	model = today_model
+	template_name =  'delete.html'
+	form_class = today
+
+	def get_success_url(self):
+		return reverse('today')

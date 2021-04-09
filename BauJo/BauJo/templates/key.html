@@ -7,12 +7,7 @@
 {% block body %}
 <br>
 <h3>   Key  : Description </h3>
-<h3> • Tasks: Things you have to do </h3>
-<h3> - Notes: Things you don't want to forget</h3>
-<h3> O Events: Noteworthy moments in time </h3>
-
 <ul> 
-
 {% for x in object_list %} 
 
 {{x.keyName}} : {{x.keyDesc}}
