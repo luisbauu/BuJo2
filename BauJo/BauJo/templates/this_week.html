@@ -8,11 +8,29 @@
 
 <h1> 3.22.MON - 3.28.SUN </h1>
 
-<h3> • Maglinis ng bahay </h3>
-<h3> • Bolpen ni kapatid </h3>
-<h3> • Charger wag kalimutan</h3>
-<h3> - Mura lugaw dun sa may kanto malapit sa trike station </h3>
-<h3> O (26) Date with bebe (whole day) </h3>
-<h3> O (28) Ride with the boys pa MOA (whole day) </h3>
+{% for x in object_list %} 
+
+{% if x.keyModel.keyName == '• Task' %}
+
+{{x.keyModel.keyName}} : {{x.thisWeekDesc}} ||
+<a href = "{{ x.thisWeek_edit }}"><button>Edit</button></a>
+<a href = "{{ x.thisWeek_delete }}"><button>Delete</button></a>
+<a href = "{{ x.thisWeek_done }}"><button>Mark as Done</button></a>
+
+<br>
+
+{% else %}
+
+{{x.keyModel.keyName}} : {{x.thisWeekDesc}} ||
+<a href = "{{ x.thisWeek_edit }}"><button>Edit</button></a>
+<a href = "{{ x.thisWeek_delete }}"><button>Delete</button></a>
+<br>
+
+{% endif %}
+
+{% endfor %}
+
+<br>
+<a href = "{% url 'new_thisWeek' %}"><button>Add Item</button></a>
 
 {% endblock %}

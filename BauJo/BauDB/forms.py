@@ -25,8 +25,10 @@ class key(forms.ModelForm):
 		model = key_model
 		fields = ['keyName','keyDesc']
 	
-class this_week(forms.Form):
-	name = forms.CharField(label='', max_length = 25)
+class this_week(forms.ModelForm):
+	class Meta:
+		model = thisWeek_model
+		fields = ['keyModel', 'thisWeekDesc']
 
 class today(forms.ModelForm):
 	class Meta:

@@ -11,7 +11,7 @@ class key_model(models.Model):
 
 class profile_model(models.Model):
 	profileName =  models.CharField(max_length = 25)
-	profileBio = models.CharField(max_length = 25)
+	profileBio = models.TextField()
 	profileImage = models.ImageField(upload_to ='images/', null = True)
 
 class today_model(models.Model):
@@ -28,5 +28,15 @@ class today_model(models.Model):
 		return reverse('today_done', args = [str(self.id)])
 
 
-    # def deltwtask(self):
-    #     return reverse('deletetwtask', args=[str(self.id)])
+class thisWeek_model(models.Model):
+	keyModel = models.ForeignKey(key_model, on_delete = models.CASCADE)
+	thisWeekDesc = models.CharField(max_length=100)
+
+	def thisWeek_edit(self):
+		return reverse('new_thisWeek_update', args = [str(self.id)])
+
+	def thisWeek_delete(self):
+		return reverse('thisWeek_delete', args = [str(self.id)])
+
+	def thisWeek_done(self):
+		return reverse('thisWeek_done', args = [str(self.id)])

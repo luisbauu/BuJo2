@@ -42,6 +42,15 @@ def new_today(request):
 			return redirect('today')
 	return render(request,'update.html', {'form' : form})
 
+def new_thisWeek(request):
+	form = this_week()
+	if request.method == 'POST':
+		form = this_week(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('this_week')
+	return render(request,'update.html', {'form' : form})
+
 def new_key(request):
 	form = key()
 	if request.method == 'POST':
@@ -51,13 +60,17 @@ def new_key(request):
 			return redirect('key')
 	return render(request,'update.html', {'form' : form})
 
-
 def page_today_done(request,pk):
 	done = today_model.objects.get(id = pk)
 	done.keyModel = key_model.objects.get(id = 30)
 	done.save()
 	return redirect('today')
 
+def page_thisWeek_done(request,pk):
+	done = thisWeek_model.objects.get(id = pk)
+	done.keyModel = key_model.objects.get(id = 30)
+	done.save()
+	return redirect('this_week')
 
 def page_today(request):
 
@@ -129,4 +142,23 @@ class TodayDeleteView(DeleteView):
 
 	def get_success_url(self):
 		return reverse('today')
+################
+class thisWeekListView(ListView):
+	model = thisWeek_model
+	template_name = 'this_week.html'
 
+class thisWeekUpdateView(UpdateView):
+	model = thisWeek_model
+	template_name =  'update.html'
+	form_class = this_week
+
+	def get_success_url(self):
+		return reverse('this_week')
+
+class thisWeekDeleteView(DeleteView):
+	model = thisWeek_model
+	template_name =  'delete2.html'
+	form_class = this_week
+
+	def get_success_url(self):
+		return reverse('this_week')
