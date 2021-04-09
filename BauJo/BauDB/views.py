@@ -62,13 +62,13 @@ def new_key(request):
 
 def page_today_done(request,pk):
 	done = today_model.objects.get(id = pk)
-	done.keyModel = key_model.objects.get(keyName = '• Task Done')
+	done.keyModel = key_model.objects.get(id = 30)
 	done.save()
 	return redirect('today')
 
 def page_thisWeek_done(request,pk):
 	done = thisWeek_model.objects.get(id = pk)
-	done.keyModel = key_model.objects.get(keyName = '• Task Done')
+	done.keyModel = key_model.objects.get(id = 30)
 	done.save()
 	return redirect('this_week')
 
